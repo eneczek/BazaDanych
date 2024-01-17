@@ -38,21 +38,28 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     if(Integer.parseInt(ile.getText().toString())>0) {
                         haslo = "";
-                        zestaw = litery;
-                        if (checkcyfry.isChecked()) {
-                            zestaw += cyfry;
-                        }
-                        if (checkSpecjalne.isChecked()) {
-                            zestaw += specjalne;
-                        }
-                        if (!ile.getText().toString().isEmpty()) {
-                            for (int x = 0; x < Integer.parseInt(ile.getText().toString()); x++) {
-                                int rand = (int) (Math.random() * zestaw.length());
-                                haslo += zestaw.charAt(rand);
+                        zestaw="";
+                        if(checkcyfry.isChecked() || checklitery.isChecked() || checkSpecjalne.isChecked()){
+                            if (checklitery.isChecked()){
+                                 zestaw = litery;
                             }
-                            Toast.makeText(MainActivity.this, "Twoje hasło to: " + haslo, Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Podaj dlugosć hasła", Toast.LENGTH_SHORT).show();
+                            if (checkcyfry.isChecked()) {
+                                zestaw += cyfry;
+                            }
+                            if (checkSpecjalne.isChecked()) {
+                                zestaw += specjalne;
+                            }
+                            if (!ile.getText().toString().isEmpty()) {
+                                for (int x = 0; x < Integer.parseInt(ile.getText().toString()); x++) {
+                                    int rand = (int) (Math.random() * zestaw.length());
+                                    haslo += zestaw.charAt(rand);
+                                }
+                                Toast.makeText(MainActivity.this, "Twoje hasło to: " + haslo, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Podaj dlugosć hasła", Toast.LENGTH_SHORT).show();
+                            }
+                        }else {
+                            Toast.makeText(getApplicationContext(),"Zaznacz co najmniej jedną z opcji",Toast.LENGTH_SHORT).show();
                         }
                     }else {
                         Toast.makeText(getApplicationContext(),"Długosc musi byc liczbą dodatnią",Toast.LENGTH_SHORT).show();
